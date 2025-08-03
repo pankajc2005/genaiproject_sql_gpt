@@ -9,7 +9,7 @@ SQLGPT is a web app that converts plain English into SQL queries using **Google 
 ## 📁 Folder Structure
 
 ```
-SQLGPT/
+SQL-GPT/
 ├── app/
 │   ├── main.py          # FastAPI backend
 │   └── model.py         # Gemini integration logic
