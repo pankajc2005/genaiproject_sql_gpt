@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SQLGPT</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body>
+ <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="brand">SQLGPT</div>
+      <button class="new-chat" onclick="newChat()">+ New Chat</button>
+      <div id="tabs"></div>
+      <div class="sidebar-footer">
+        <p>Powered by Pankaj Chavan</p>
+      </div>
+    </aside>
+    <main class="main">
+      <div class="chat-window" id="chat-window"></div>
+      <div class="input-container">
+        <input type="text" id="user-input" placeholder="Ask something..." />
+        <button onclick="sendMessage()">⏎</button>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
