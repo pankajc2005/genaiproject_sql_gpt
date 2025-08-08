@@ -1,106 +1,289 @@
-# SQLGPT - Natural Language to SQL Query Generator
+# **SQLGPT**
 
-SQLGPT is a tool that leverages the power of natural language processing to generate SQL queries.  It allows users to input questions or requests in plain English, and it translates them into executable SQL code. This project uses FastAPI for the backend, Google's Gemini model for natural language processing, and a JavaScript frontend for user interaction.
+### *Natural Language → SQL Query Generator*
 
-## Features
+SQLGPT is a web app that converts plain English into SQL queries using **Google Gemini API**, with a FastAPI backend and a lightweight HTML/CSS/JS frontend.
 
-*   **Natural Language to SQL:** Converts natural language questions into SQL queries.
-*   **User-Friendly Interface:**  A clean and intuitive interface for easy interaction.
-*   **Multiple Chat Tabs:** Supports multiple concurrent chat sessions.
-*   **Code Highlighting:**  Highlights SQL code for better readability.
-*   **Copy and Download:**  Allows users to copy the generated SQL query or download it as a `.sql` file.
-*   **Light/Dark Theme:**  Offers a toggleable light/dark theme for user preference.
+---
 
-## Technologies Used
+## 📁 Folder Structure
 
-*   **Backend:** FastAPI (Python)
-*   **Language Model:** Google Gemini
-*   **Frontend:** JavaScript, HTML, CSS
-*   **Code Highlighting:** Prism.js
+```
+SQL-GPT/
+├── app/
+│   ├── main.py          # FastAPI backend
+│   └── model.py         # Gemini integration logic
+├── frontend/
+│   ├── index.html       # UI layout
+│   ├── script.js        # Frontend logic
+│   └── style.css        # Styling
+├── .env                 # API key config
+├── README.md            # Project docs
+├── requirements.txt     # Python dependencies
+```
 
-## Setup Guide
+---
 
-### Prerequisites
+## ✨ Features
 
-*   Python 3.6+
-*   pip
-*   A Google Cloud project with the Gemini API enabled and an API key.
-    *   Enable the Gemini API in your Google Cloud project.
+* ✅ Convert natural language to SQL
+* ✅ Syntax-highlighted output (via Prism.js)
+* ✅ Multi-tab chat interface
+* ✅ Copy and download SQL results
+* ✅ Light/dark mode support
+* ✅ Handles irrelevant or off-topic questions gracefully
 
-### Installation
+---
 
-1.  **Clone the repository:**
+## 🛠 Tech Stack
 
-    ```bash
-    git clone <repository_url>
-    cd <repository_directory>
-    ```
+| Layer         | Technology            |
+| ------------- | --------------------- |
+| **Backend**   | Python, FastAPI       |
+| **Frontend**  | HTML, CSS, JavaScript |
+| **LLM**       | Google Gemini API     |
+| **Highlight** | Prism.js              |
 
-2.  **Create a virtual environment (recommended):**
+---
 
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Linux/macOS
-    venv\Scripts\activate  # On Windows
-    ```
+## 🚀 Getting Started
 
-3.  **Install dependencies:**
+### 🔧 Prerequisites
 
-    ```bash
-    pip install -r requirements.txt
-    ```
-    ```
+* Python 3.9 or higher
+* `pip` installed
+* Gemini API key from Google Cloud Console
 
-4.  **Configuration:**
-    *   It's crucial to keep your API key secure.  Never commit your `.env` file to version control.
-    *   Create a `.env` file in the project's root directory.
-    *   Add your Gemini API key to the `.env` file:
+---
 
-        GEMINI_API_KEY=YOUR_GEMINI_API_KEY
-        ```
+### 📦 Installation
 
-    *   **Important:** Replace `YOUR_GEMINI_API_KEY` with your actual Gemini API key.  If you don't have one, you'll need to create a Google Cloud project, enable the Gemini API, and generate an API key.
+```bash
+# 1. Clone the repository
+git clone https://github.com/your-user/sqlgpt.git
+cd sqlgpt
 
+# 2. Create virtual environment
+python -m venv venv
 
+# 3. Activate environment
+# macOS/Linux
+source venv/bin/activate
+# Windows
+venv\Scripts\activate
 
-### Running the Application
+# 4. Install dependencies
+pip install -r requirements.txt
+```
 
-1.  **Start the FastAPI backend:**
-    *   The `--reload` flag enables automatic reloading of the server when you make changes to the code.  This is useful for development.
-    *   By default, the server will run on `http://localhost:8000`.
-
-2.  **Open the `index.html` file in your browser:**
-
-    *   You have a couple of options here:
-    *   Navigate to the `index.html` file in your frontend directory in your web browser.  For example, if you are running a local server, you might open `http://localhost/frontend/index.html` (the exact URL will depend on your local setup).
-    *   If you just open the file directly (e.g., `file:///path/to/index.html`), some browser security restrictions might prevent the frontend from properly connecting to the backend API. Running a simple local HTTP server is generally recommended.
-    *   Simplest way to serve the frontend files is using python's simple http server. Navigate to the frontend directory and run command `python -m http.server` this will serve the content of the folder at http://localhost:8000/ .
-
-### Usage
-
-1.  **Type your SQL query request in the input box.**
-2.  **Press Enter or click the send button.**
+---
 
 
-    *   The application sends your request to the FastAPI backend.
-    *   The backend uses the Gemini model to generate a SQL query.
-    *   The generated query and explanation are sent back to the frontend.
+## 🔐 Set Up Gemini API Key (Step-by-Step)
 
-3.  **The generated SQL query and explanation will appear in the chat window.**
-4.  **Use the copy button to copy the SQL query to your clipboard.**
-5.  **Use the download button to download the SQL query as a `.sql` file.**
+To use Google’s Gemini API, you need to get an API key from your Google Cloud Console.
 
-### Troubleshooting
+### ✅ Step 1: Create a Google Cloud Project
 
-*   **"ModuleNotFoundError: No module named 'fastapi'" or similar:**
-    *   Make sure you have activated your virtual environment and installed the dependencies using `pip install -r requirements.txt`.
-*   **"Connection refused" or similar when the frontend tries to connect to the backend:**
-    *   Make sure the FastAPI backend is running.
-    *   Double-check the URL in your JavaScript code (`frontend/script.js`) to ensure it matches the address where your backend is running (usually `http://localhost:8000`).
-    *   Ensure that CORS is configured correctly in your FastAPI application (`app/main.py`). The `allow_origins` should include the origin of your frontend, or be set to `["*"]` for development.
-*   **Gemini API errors (e.g., "API key not found"):**
-    *   Make sure you have set the `GEMINI_API_KEY` environment variable correctly in your `.env` file.
-    *   Verify that your API key is valid and that the Gemini API is enabled for your Google Cloud project.
-*   **Frontend not displaying correctly:**
-    *   Check your browser's developer console for any JavaScript errors.
-    *   Make sure all the frontend files (`index.html`, `style.css`, `script.js`) are in the correct directory.
+1. Go to: [https://console.cloud.google.com](https://console.cloud.google.com)
+2. Click on the project dropdown → “**New Project**”
+3. Name it (e.g., `SQLGPT`) and click **Create**
+
+---
+
+### ✅ Step 2: Enable the Gemini API
+
+1. Inside your new project, go to **APIs & Services** → **Library**
+2. Search for **“Gemini API”**
+3. Click on it, then click **Enable**
+
+---
+
+### ✅ Step 3: Create an API Key
+
+1. Go to **APIs & Services** → **Credentials**
+2. Click **“+ Create Credentials”** → choose **API Key**
+3. Copy the generated key
+
+---
+
+### ✅ Step 4: Create the `.env` File
+
+In your project root (`SQLGPT/`), create a new file named `.env`:
+
+```env
+GEMINI_API_KEY=your_actual_gemini_api_key_here
+```
+
+> 🔒 **Important:** Never commit this file to GitHub or share your key publicly.
+
+---
+
+## ▶️ Run the App (Step-by-Step Guide)
+
+Here's how to run the backend and frontend of SQLGPT locally:
+
+---
+
+### ✅ 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-user/sqlgpt.git
+cd sqlgpt
+```
+
+---
+
+### ✅ 2. Set Up Python Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+#### ➤ Activate the Environment
+
+* **macOS/Linux**:
+
+  ```bash
+  source venv/bin/activate
+  ```
+* **Windows**:
+
+  ```bash
+  venv\Scripts\activate
+  ```
+
+---
+
+### ✅ 3. Install Python Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+This installs FastAPI, the Gemini API client, and other required packages.
+
+---
+
+### ✅ 4. Add Your `.env` File
+
+Make sure your `.env` file (created earlier) is in the **project root** like this:
+
+```
+SQLGPT/
+├── app/
+│   ├── main.py
+│   └── model.py
+├── frontend/
+│   └── ...
+├── .env   👈 HERE
+```
+
+The file should contain:
+
+```env
+GEMINI_API_KEY=your_actual_gemini_api_key_here
+```
+
+---
+
+### ✅ 5. Start the FastAPI Backend
+
+From the root directory, run:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+You should see output like:
+
+```
+Uvicorn running on http://127.0.0.1:8000
+```
+
+Your backend is now live at:
+👉 **[http://localhost:8000](http://localhost:8000)**
+
+---
+
+### ✅ 6. Start the Frontend
+
+In a **new terminal window** (or tab):
+
+```bash
+cd frontend
+python -m http.server 5500
+```
+
+This serves the frontend at:
+👉 **[http://localhost:5500](http://localhost:5500)**
+
+> ✅ Open it in your browser and start typing questions like:
+> “Get employees in HR with salary above 50000”
+
+---
+
+### 📌 Development Tips
+
+* Keep both backend and frontend terminals open while developing.
+* If `.env` changes, **restart the backend** to reload your API key.
+* Any change to `main.py` or `model.py` will auto-reload the FastAPI server in development mode (`--reload`).
+
+---
+
+
+## 🧪 Example Prompts
+
+Try asking:
+
+* `List employees in the HR department with salary over 50000`
+* `Get average sales per region`
+* `Create a table for student enrollments`
+* `Insert 5 rows into orders table`
+* `Update salary of employee with ID 102 to 80000`
+
+---
+
+## 🆘 Troubleshooting
+
+### 🔸 Missing modules?
+
+```bash
+pip install -r requirements.txt
+```
+
+### 🔸 Frontend not loading?
+
+* Make sure you start it via:
+
+  ```bash
+  cd frontend
+  python -m http.server 5500
+  ```
+
+### 🔸 “Server Error” in browser?
+
+* Check that the FastAPI backend is running:
+
+  ```bash
+  uvicorn app.main:app --reload
+  ```
+
+### 🔸 Gemini API issues?
+
+* Confirm `.env` is correctly set
+* Restart backend after editing `.env`
+
+---
+
+## 🔐 Security Tips
+
+* Use `.env` for local dev — never expose API keys
+* Use environment variables in production
+* Add rate limiting, CORS restrictions, and error handling in production environments
+
+---
+
+## 📄 License
+
+This project is intended for educational and personal use. Feel free to fork and modify it to suit your needs.
